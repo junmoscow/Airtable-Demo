@@ -1,0 +1,35 @@
+<html>
+  <title>Demo 02: Range Sliders (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo02"></service-airtable>
+  </div>
+
+  <h1>Demo 02: Range Sliders</h1>
+
+  <p>This demo shows how to use range sliders to allow user to select a number.</p>
+
+  <h2>Remote Interface</h2>
+
+  <input type=range cloud_action='update' cloud_name='motor_speed' cloud_min="-100" cloud_max="100" min='-100' max='100' value='0' />
+
+  <h2>Demo 02 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo02_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo02_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo02_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

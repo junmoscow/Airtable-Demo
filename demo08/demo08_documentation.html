@@ -1,0 +1,107 @@
+<html>
+	<title>Demo 08: Form Input (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 08: Form Input</h1>
+
+  <p>This demo shows how to use a form input which allows updates prior to pressing button.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The "Name" column has an entry "motor_speed" that will hold the updated values
+			from the Range Slider and "command" that gets a command from the Form's Submit Button.
+			The "Value" of motor_speed will be a number used to control the motor and the
+			command will be "Run" when it is time to run the code.
+		</p>
+
+		<img class="documentation_image" src="./img/demo08_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo08_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>The slider will change the cloud value every time it changes.  But nothing
+			will happen with the robot until the "Run" command is sent to the cloud.
+		</p>
+
+		<p>See the Range Slider demo for more information about the slider functionality.</p>
+
+		<img class="documentation_image" src="./img/demo08_remote_code.png">
+
+		<p>This is how the range slider and form will look on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo08_remote_interface.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo08_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local page isn't monitoring the motor_speed value. So nothing happens
+			when that changes (when the user moves the Range Slider).</p>
+
+		<p>When the "command" value equals "Run" (e.g. when the user submits the form),
+			then the code is downloaded and run on the SPIKE Prime.  Note that there is a
+			replace that happens in the code, this time with "CLOUD[motor_speed]" that
+			looks up the current value of "motor_speed" in the cloud.
+		</p>
+
+		<p>After the code is run, the cloud "command" is reset to nothing.  This allows
+			the user to re-submit the form and send "Run" once again.
+		</p>
+
+		<img class="documentation_image" src="./img/demo08_local_code.png">
+
+		<p>This is how the element will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo08_local_interface.png">
+
+	</blockquote>
+
+	<h2>Demo 08 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo08_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo08_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo08_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

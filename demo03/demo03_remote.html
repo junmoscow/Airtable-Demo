@@ -1,0 +1,35 @@
+<html>
+  <title>Demo 03: Text Box (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo03"></service-airtable>
+  </div>
+
+  <h1>Demo 03: Text Box</h1>
+
+  <p>This demo shows how to use a textbox input for user to supply content.</p>
+
+  <h2>Remote Interface</h2>
+
+  <input type=text cloud_action='update' cloud_name='display_text' value='Enter Text' />
+
+  <h2>Demo 03 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo03_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo03_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo03_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<html>
+	<title>Demo 03: Text Box (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 03: Text Box</h1>
+
+  <p>This demo shows how to use a textbox input for user to supply content.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The "Name" column has an entry "display_text" that will hold the updated
+			text from the Text Box. The "Value" can be any string to be displayed.</p>
+
+		<img class="documentation_image" src="./img/demo03_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo03_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>This text box (<code>&lt;input type="text" ...&gt;</code>) will update the
+			"display_text" to be whatever the current value of the text box is.
+		</p>
+
+		<img class="documentation_image" src="./img/demo03_remote_code.png">
+
+		<p>This is how the text box will look on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo03_remote_interface.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo03_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local interface is set up to monitor the "display_text" value, and will
+			react if it changes at all (to any new value). When it changes, it will then
+			download and run the code into Slot #0 (the "cloud_action_val" value).
+			Note that inside the MicroPython code there is variable (<code>my_text</code>)
+			that is set to a "REPLACE[cloud_current]" parameter: before downloading the code,
+			this will be replaced with whatever value is currently in the "display_text"
+			variable. Note that because this is a string, there are extra "single-quotes"
+			around the value. Then this variable is passed to the light_matrix.write function.
+		</p>
+
+		<p>After the code is run, the cloud Value is set to nothing (empty string: "")
+			by the cloud_reset parameter.
+		</p>
+
+		<img class="documentation_image" src="./img/demo03_local_code.png">
+
+		<p>This is how this element will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo03_local_interface.png">
+
+	</blockquote>
+
+	<h2>Demo 03 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo03_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo03_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo03_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

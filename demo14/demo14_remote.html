@@ -1,0 +1,39 @@
+<html>
+  <title>Demo 14: Math Bot Project (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo14"></service-airtable>
+  </div>
+
+  <h1>Demo 14: Math Bot Project</h1>
+
+  <p>This project-demo shows how to create an interactive robot that solves user supplied math problems.</p>
+
+  <h2>Remote Interface</h2>
+
+  <p>Enter the first number: <input type=text cloud_action='update' cloud_name='number1' value='' size=3></p>
+
+  <p>Enter the second number: <input type=text cloud_action='update' cloud_name='number2' value='' size=3></p>
+
+  <p>Add them together: <button cloud_action='update' cloud_name='command'>ADD</button></p>
+
+  <h2>Demo 14 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo14_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo14_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo14_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

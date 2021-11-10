@@ -1,0 +1,61 @@
+<html>
+	<title>Demo 13: Shooter Project (Local)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<!-- SERVICE DOCK -->
+	<div id="servicedock">
+		<service-airtable id="service_airtable" tablename="demo13"></service-airtable>
+		<service-spike id="service_spike"></service-spike>
+	</div>
+
+	<h1>Demo 13: Shooter Project</h1>
+
+  <p>This project-demo shows how to adjust motor positions in a shooter robot.</p>
+
+  <h2>Local Interface</h2>
+
+	<div class="cloud_check">
+		<b><em>Monitor Cloud:</em></b>
+
+	  <div type="cloud_check" cloud_compare="equal" cloud_action="download_code">
+			<input type=text id="cloud_name" value="command">
+			<input type=text id="cloud_value" value="Aim and Shoot">
+      <input type=text id="cloud_action_val" value="0">
+			<textarea id="cloud_code"># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import PrimeHub, Motor
+from spike.control import wait_for_seconds
+
+# horizontal position on Motor A:
+h_motor = Motor('A')
+h_motor.run_to_position(CLOUD[position_horizontal],'shortest path',20)
+# vertical position on Motor B:
+v_motor = Motor('B')
+v_motor.run_to_position(CLOUD[position_vertical],'shortest path',20)
+# shooter on Motor C:
+s_motor = Motor('C')
+s_motor.start(100)
+wait_for_seconds(2)
+s_motor.stop()</textarea>
+			<input type=text id="cloud_reset" value="">
+    </div>
+
+	</div>
+
+	<h2>Demo 13 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo13_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo13_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo13_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

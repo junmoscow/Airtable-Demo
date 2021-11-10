@@ -1,0 +1,38 @@
+<html>
+  <title>Demo 05: Textarea Input (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo05"></service-airtable>
+  </div>
+
+  <h1>Demo 05: Textarea Input</h1>
+
+  <p>This demo shows how to use a textarea input for user to supply multi-line content.</p>
+
+  <h2>Remote Interface</h2>
+
+  <textarea cloud_action='update' cloud_name='code' cols=40 rows=5>from spike import PrimeHub
+hub = PrimeHub()
+hub.light_matrix.write('Input Textarea')
+  </textarea>
+
+  <h2>Demo 05 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo05_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo05_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo05_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

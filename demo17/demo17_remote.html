@@ -1,0 +1,52 @@
+<html>
+  <title>Demo 17: Random Number Match Project (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo17"></service-airtable>
+  </div>
+
+  <h1>Demo 17: Random Number Match Project</h1>
+
+  <p>This project-demo challenges the user to match a random number.</p>
+
+  <h2>Remote Interface</h2>
+
+  <p>1. Generate Random Sequence</p>
+
+  <button cloud_action='update' cloud_name='command'>Generate</button>
+
+  <p>2. Show Sequence</p>
+
+  <button cloud_action='update' cloud_name='command'>Show</button>
+
+  <p>3. Guess Sequence</p>
+
+  <form cloud_form='input'>
+    <input type=text cloud_action='update' cloud_name='sequence_guess' value=''>
+    <input type='Submit'>
+  </form>
+
+  <p>4. If you got it right: go back to step #2 to see more of the sequence.</p>
+
+  <p>5. Else, if you got it wrong: either try again with this sequence or go back to step #1 to start over with a new sequence.</p>
+
+  <h2>Demo 17 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo17_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo17_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo17_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

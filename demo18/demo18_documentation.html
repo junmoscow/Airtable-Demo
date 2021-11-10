@@ -1,0 +1,122 @@
+<html>
+	<title>Demo 18: SPIKE Prime MicroPython IDE (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 18: SPIKE Prime MicroPython IDE Project</h1>
+
+  <p>This project-demo creates a browser-based SPIKE Prime MicroPython
+    IDE for remotely programming a SPIKE Prime.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The Airtable is set up as follows:
+			<ul>
+				<li><em>slot_id</em>: which slot on the SPIKE Prime should the program go into</li>
+				<li><em>code</em>: the MicroPython code</li>
+				<li><em>program_name</em>: what is the name of the program</li>
+				<li><em>command</em>: this is used (when equals 'Stop Program') to stop currently running program</li>
+			</ul>
+		</p>
+
+		<img class="documentation_image" src="./img/demo18_airtable.png">
+
+		<p>In Airtable, to change the type of a column, use the "Customize field type"
+			option to select "Long text" as the type of the Value.  This allows
+			long multiline text that includes "new line characters."
+		</p>
+
+		<img class="documentation_image" src="./img/demo18_airtable_type.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo18_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>The interface has a Program Name input text and Slot ID select dropdown.</p>
+		<p>There is a Form input with a textarea for entering code (with the default
+			MicroPython code pre-entered).</p>
+		<p>Finally, outside the form, is a button for stopping the program.</p>
+
+		<img class="documentation_image" src="./img/demo18_remote_code.png">
+
+		<p>This is what the interface will look like on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo18_remote_interface.png">
+
+		<p>When the page loads, we want to pre-populate the Program Name and the
+			Slot ID with previously stored values in the Cloud. This JavaScript
+			function checks to see if the cloud is active, and when it is, reads in
+			the values and sets the HTML elements.</p>
+
+		<img class="documentation_image" src="./img/demo18_remote_javascript.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo18_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local page is monitoring "code" to see when it changes, at which point
+			it calls the local JavaScript function download_code to download the code.</p>
+
+		<p>The "command" is being monitored to see if it equals "Stop Program" and, if so,
+			will stop the program (and reset itself); this is the same as Demo 01.</p>
+
+		<img class="documentation_image" src="./img/demo18_local_code.png">
+
+		<p>This is how the interface will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo18_local_interface.png">
+
+		<p>Here is the JavaScript code that gets the Program Name and Slot ID and then
+			downloads the code into the SPIKE Prime:</p>
+
+		<img class="documentation_image" src="./img/demo18_local_javascript.png">
+
+	</blockquote>
+
+	<h2>Demo 18 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo18_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo18_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo18_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

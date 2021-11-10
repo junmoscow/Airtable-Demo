@@ -1,0 +1,92 @@
+<html>
+  <title>Demo 18: SPIKE Prime MicroPython IDE (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+    <script>
+      function onload_post () {
+        setTimeout(load_defaults,100);
+      }
+      function load_defaults() {
+        if (cloud_connection.isActive()) {
+          // get current values in cloud
+          var prog_value = "Enter Program Name";
+          try { prog_value = cloud_get("program_name").toString(); }
+          catch(err) { console.log("ERROR prog name"); }
+          var slot_value = 0;
+          try { slot_value = parseInt(cloud_get("slot_id")); }
+          catch(err) { console.log("ERROR slot id"); }
+          // get HTML elements
+          console.log("Prog value: " + prog_value + ", slot_value: " + slot_value);
+          var prog_input = document.getElementById("prog");
+          var slot_input = document.getElementById("slot");
+          // load data into them
+          prog_input.value = prog_value;
+          slot_input.selectedIndex = slot_value + 1; // off by one because of select header
+        } else {
+          setTimeout(load_defaults,100); // recall until cloud connection is active
+        }
+      }
+    </script>
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo18"></service-airtable>
+  </div>
+
+  <h1>Demo 18: SPIKE Prime MicroPython IDE Project</h1>
+
+  <p>This project-demo creates a browser-based SPIKE Prime MicroPython
+    IDE for remotely programming a SPIKE Prime.</p>
+
+  <h2>Remote Interface</h2>
+
+  <p>Program name: <input id="prog" type=text cloud_action='update' cloud_name="program_name" value="Loading..." /></p>
+
+  <p>Download Slot:
+    <select id="slot" cloud_name='slot_id' cloud_action='update'>
+      <option cloud_value='0'>Select Slot:</option>
+      <option cloud_value='0'>Slot 0</option>
+      <option cloud_value='1'>Slot 1</option>
+      <option cloud_value='2'>Slot 2</option>
+      <option cloud_value='3'>Slot 3</option>
+      <option cloud_value='4'>Slot 4</option>
+      <option cloud_value='5'>Slot 5</option>
+      <option cloud_value='6'>Slot 6</option>
+      <option cloud_value='7'>Slot 7</option>
+      <option cloud_value='8'>Slot 8</option>
+      <option cloud_value='9'>Slot 9</option>
+      <option cloud_value='10'>Slot 10</option>
+    </select>
+  </p>
+
+  <form cloud_form='textarea'>
+    <textarea cloud_action='update' cloud_name='code' cols=80 rows=10># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import PrimeHub, LightMatrix, Button, StatusLight, ForceSensor, MotionSensor, Speaker, ColorSensor, App, DistanceSensor, Motor, MotorPair
+from spike.control import wait_for_seconds, wait_until, Timer
+
+hub = PrimeHub()
+
+hub.light_matrix.show_image('HAPPY')</textarea>
+    <br /><br />
+    <input type='Submit' value='Submit and Run SPIKE Prime Code'>
+  </form>
+
+  <button cloud_action='update' cloud_name='command'>Stop Program</button>
+
+  <h2>Demo 18 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo18_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo18_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo18_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

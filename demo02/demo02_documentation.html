@@ -1,0 +1,110 @@
+<html>
+	<title>Demo 02: Range Sliders (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 02: Range Sliders</h1>
+
+  <p>This demo shows how to use range sliders to allow user to select a number.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The "Name" column has an entry "motor_speed" that will hold the updated
+			motor speed from the Range Slider. The "Value" can be a number (although in
+			string format) ranging from -100 to 100.</p>
+
+		<img class="documentation_image" src="./img/demo02_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo02_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>This range slider (<code>&lt;input type="range" ...&gt;</code>) will update the
+			"motor_speed" to be whatever the current value of the range slider is.
+			Note:
+			<ul>
+				<li>The "min" and "max" attributes are default to the input range slider:
+					they determine what the min and max are of the webpage element.</li>
+				<li>The "value" attribute tells the range slider what default value to
+					start at when the page loads.</li>
+				<li>The "cloud_min" and "cloud_max" are extra checks that are added to
+					make sure the value doesn't go outside an "acceptable" range (here:
+					because motor values are only -100 to 100 we want to constrain the value).</li>
+			</ul>
+		</p>
+
+		<img class="documentation_image" src="./img/demo02_remote_code.png">
+
+		<p>This is how the range slider will look on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo02_remote_interface.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo02_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local interface is set up to monitor the "motor_speed" value, and will
+			react if it changes at all (to any new value). When it changes, it will then
+			download and run the code into Slot #0 (the "cloud_action_val" value).
+			Note that inside the MicroPython code
+			there is a "REPLACE[cloud_current]" parameter: before downloading the code,
+			this will be replaced with whatever value is currently in the "motor_speed"
+			variable. Thus: the code will start the motor at whatever power (and direction,
+			since -100 to 100) the slider was at.
+		</p>
+
+		<img class="documentation_image" src="./img/demo02_local_code.png">
+
+		<p>This is how this element will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo02_local_interface.png">
+
+	</blockquote>
+
+	<h2>Demo 02 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo02_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo02_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo02_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

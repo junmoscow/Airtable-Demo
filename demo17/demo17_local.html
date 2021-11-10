@@ -1,0 +1,120 @@
+<html>
+	<title>Demo 17: Random Number Match Project (Local)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+		<script>
+			// helper function: getRandomInt
+			// - from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+			// - returns a number 0 to max (inclusive)
+			function getRandomInt(max) {
+				return Math.floor(Math.random() * Math.floor(max));
+			}
+
+			// create a new random sequence
+			function generate_sequence(name, value) {
+				// 1. reset the length to "1"
+				cloud_update("current_length","1");
+				// 2. create a new random sequence (and update cloud)
+				// - create a random sequence that is 20 numbers long
+				var new_sequence = "";
+				for (var i=0; i<20; i++) {
+					new_sequence += getRandomInt(9).toString();
+				}
+				cloud_update("sequence",new_sequence); // update the cloud
+				// 3. run a program on the SPIKE Prime in Slot 0
+				// - this is "fake" just to make it look like SPIKE is doing something
+				mySPIKE.executeProgram(0);
+			}
+
+			// compare the guess to the actual sequence
+			function compare_sequence(name, value) {
+				var current_length = parseInt(cloud_get("current_length"));
+				var current_sequence = cloud_get("sequence").toString();
+				var current_guess = value;
+				if (current_sequence.substring(0, current_length) == current_guess) {
+					// it's a match!
+					// 1. show that it's a match
+					mySPIKE.PrimeHub().light_matrix.write('yes!');
+					// 2. increment the length by one (so next round is one longer)
+					cloud_update("current_length",(current_length+1).toString())
+				} else {
+					// it's NOT a match!
+					// 1. show that it's not a match
+					mySPIKE.PrimeHub().light_matrix.write('nope');
+				}
+			}
+		</script>
+	</head>
+<body>
+
+	<!-- SERVICE DOCK -->
+	<div id="servicedock">
+		<service-airtable id="service_airtable" tablename="demo17"></service-airtable>
+		<service-spike id="service_spike"></service-spike>
+	</div>
+
+	<h1>Demo 17: Random Number Match Project</h1>
+
+  <p>This project-demo challenges the user to match a random number.</p>
+
+  <h2>Local Interface</h2>
+
+	<div class="cloud_check">
+		<b><em>Monitor Cloud:</em></b>
+
+		<p style="color: red;">1. If they click Generate button: generate a new sequence.</p>
+	  <div type="cloud_check" cloud_compare="equal" cloud_action="run_js">
+			<input type=text id="cloud_name" value="command">
+			<input type=text id="cloud_value" value="Generate">
+      <input type=text id="cloud_action_val" value="generate_sequence">
+			<input type=text id="cloud_reset" value="">
+    </div>
+
+		<p style="color: red;">2. If they click Show button: show a portion of the sequence.</p>
+		<div type="cloud_check" cloud_compare="equal" cloud_action="download_code">
+			<input type=text id="cloud_name" value="command">
+			<input type=text id="cloud_value" value="Show">
+      <input type=text id="cloud_action_val" value="1">
+			<textarea id="cloud_code"># SHOW SEQUENCE
+from spike import PrimeHub
+from spike.control import wait_for_seconds
+hub = PrimeHub()
+length = CLOUD[current_length] # length to show
+sequence = 'CLOUD[sequence]' # sequence string
+sequence = sequence[0:length] # substring of size length
+hub.light_matrix.write('Length: ' + str(length))
+hub.light_matrix.write('Sequence:')
+for character in sequence:
+	hub.light_matrix.write(character)
+	wait_for_seconds(0.25)
+	hub.light_matrix.off()
+	wait_for_seconds(0.25)
+hub.light_matrix.off()
+</textarea>
+			<input type=text id="cloud_reset" value="">
+    </div>
+
+		<p style="color: red;">3. If they submit a guess, compare to actual sequence.</p>
+		<div type="cloud_check" cloud_compare="changes" cloud_action="run_js">
+			<input type=text id="cloud_name" value="sequence_guess">
+      <input type=text id="cloud_action_val" value="compare_sequence">
+			<input type=text id="cloud_reset" value="">
+    </div>
+
+	</div>
+
+	<h2>Demo 17 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo17_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo17_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo17_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<html>
+	<title>Demo 10: Custom JavaScript Functions (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 10: Custom JavaScript Functions</h1>
+
+  <p>This demo shows how to use custom JavaScript functions for controlling the SPIKE Prime.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>This is the same setup as the Range Slider demo. The "Name" column has an
+			entry "motor_speed" that will hold the updated values from the Range Slider.
+		</p>
+
+		<img class="documentation_image" src="./img/demo10_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo10_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>The slider will change the cloud value of motor_speed every time it changes.</p>
+
+		<p>See the Range Slider demo for more information about the slider functionality.</p>
+
+		<img class="documentation_image" src="./img/demo10_remote_code.png">
+
+		<p>This is how the range slider and form will look on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo10_remote_interface.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo10_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local page is monitoring the motor_speed value. Any time it changes it'll
+			call a local JavaScript function called "update_motor_speed". This is because
+			the "cloud_action" value is "run_js" (which means to run the JavaScript function
+			specified in the "cloud_action_val" field).</p>
+
+		<img class="documentation_image" src="./img/demo10_local_code.png">
+
+		<p>This is how the element will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo10_local_interface.png">
+
+		<p>This is what the local JavaScript function looks like.  It is located
+			within the "head" tag of the HTML page.</p>
+
+		<p>The JavaScript function will receive the name of the field (here: motor_speed)
+			as well as the current value (whatever value is in the cloud).  In this code,
+			the name is ignored (not used) and the SPIKE Prime's motor is started (based
+			on the motor_speed).</p>
+
+		<p>The advantage of this is that it doesn't change/affect any Slots and also
+			happens faster.</p>
+
+		<p>Full documentation on available SPIKE Prime JavaScript functions is here:
+			<a href="https://tuftsceeo.github.io/SPIKE-Web-Interface/" target='_blank'>https://tuftsceeo.github.io/SPIKE-Web-Interface/</a>
+			</p>
+
+		<img class="documentation_image" src="./img/demo10_local_javascript.png">
+
+	</blockquote>
+
+	<h2>Demo 10 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo10_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo10_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo10_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+  <title>Demo 15: Music Player Project (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo15"></service-airtable>
+  </div>
+
+  <h1>Demo 15: Music Player Project</h1>
+
+  <p>This project-demo shows how to create a robot that plays music.</p>
+
+  <h2>Remote Interface</h2>
+
+  <p>Enter a sequence of notes (using C, D, E; e.g. CDEDC):</p>
+
+  <form cloud_form='input'>
+    <input type=text cloud_action='update' cloud_name='notes' value=''>
+    <input type='Submit'>
+  </form>
+
+  <h2>Demo 15 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo15_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo15_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo15_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

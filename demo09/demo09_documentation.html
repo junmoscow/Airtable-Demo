@@ -1,0 +1,178 @@
+<html>
+	<title>Demo 09: Input Queue (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 09: Input Queue</h1>
+
+  <p>This demo shows how to use an input queue to input a sequence of actions.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The "Name" column has an multiline text entry "comamnds" that will hold the updated
+			set of commands being sent from the Textarea. Note that this list of commands is formatted
+			to have one (text) command per line, separated by newline characters.</p>
+
+		<p><em><b>NOTE:</b> the Value column is of field type "Long text"</em></p>
+
+		<img class="documentation_image" src="./img/demo09_airtable.png">
+
+		<p>In Airtable, to change the type of a column, use the "Customize field type"
+			option to select "Long text" as the type of the Value.  This allows
+			long multiline text that includes "new line characters."
+		</p>
+
+		<img class="documentation_image" src="./img/demo09_airtable_type.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo09_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>There are two parts to the remote interface:
+			<ul>
+				<li>The Queue interface, which allows the user to enter and
+					manipulate commands within the queue.</li>
+				<li>The Form Input with Textarea that submits the sequence of
+					commands to the cloud.</li>
+			</ul>
+		</p>
+
+		<p>To note:
+			<ul>
+				<li>All the queue interface buttons call JavaScript functions that
+					manipulate the queue (see descriptions below)</li>
+				<li>The Form Input with Textarea interface has an extra "onclick"
+					function for the submit button that, when clicked, takes all the
+					contents from the Queue and enters it into the Textarea prior to being
+					submitted.</li>
+				<li>The Textarea can be hidden by adding the <code>style='display: none'</code>
+					attribute to the textarea. It will still be in the page and still be used
+					for moving data from the Queue to the Cloud, but won't be visible to the user.</li>
+			</ul>
+		</p>
+
+		<img class="documentation_image" src="./img/demo09_remote_code.png">
+
+		<p>This is how the interface will look on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo09_remote_interface.png">
+
+		<p>Here are the JavaScript functions used by the Queue Interface:</p>
+
+		<p><b>command_add</b>: this adds a new element to the Queue.</p>
+
+		<img class="documentation_image" src="./img/demo09_remote_javascript_add.png">
+
+		<p><b>command_move</b>: this moves element(s) (one or more) up or down
+			within the Queue.
+			<a href="https://www.tomred.net/css-html-js/reorder-option-elements-of-an-html-select.html" target=_blank>The code is from here.</a></p>
+
+		<img class="documentation_image" src="./img/demo09_remote_javascript_move.png">
+
+		<p><b>command_delete</b>: this goes through the Queue and deletes any
+			selected items. It needs to go "back to front" because the index position
+			changes as items are deleted.</p>
+
+		<img class="documentation_image" src="./img/demo09_remote_javascript_delete.png">
+
+		<p>Here is the JavaScript function for moving items from the Queue to the Textarea
+			before submitting to the cloud:</p>
+
+		<p><b>command_submit</b>: this goes through all options in the Queue and
+			adds them all to the Form Input with Textarea before it is submitted.
+			It adds a newline character between each command.</p>
+
+		<img class="documentation_image" src="./img/demo09_remote_javascript_submit.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo09_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local page is the same as Demo 08b: Form Input with Textarea. When the
+			list of commands changes, the commands are inserted into the code (via a Replace)
+			and the code is then downloaded and run on the SPIKE Prime.</p>
+
+		<img class="documentation_image" src="./img/demo09_local_code.png">
+
+		<p>This is how the element will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo09_local_interface.png">
+
+		<p>This is the MicroPython code sitting in the textbox:</p>
+
+		<div class="documentation_code"><pre>
+<code>from spike import PrimeHub, LightMatrix, Motor, MotorPair
+from spike.control import wait_for_seconds
+input_text = '''REPLACE[cloud_current]'''
+hub = PrimeHub()
+hub.light_matrix.show_image('HAPPY')
+wait_for_seconds(0.5)
+input_list = input_text.split()
+for command in input_list:
+	if command == 'Forward':
+		hub.light_matrix.write('F')
+		Motor('A').run_for_seconds(1,50)
+	elif command == 'Backward':
+		hub.light_matrix.write('B')
+		Motor('A').run_for_seconds(1,-50)
+	else:
+		hub.light_matrix.write(command)
+		wait_for_seconds(0.5)</code></pre></div>
+
+		<p>During testing, the following example was coded in CodingRooms and tested
+			prior to being added to the code. This tested the concept of having a
+			multiline list of commands, parsing the list
+			(<a href="https://www.w3schools.com/python/ref_string_split.asp" target=_blank>splitting</a>),
+			and processing each command individually.</p>
+
+		<img class="documentation_image" src="./img/demo09_codingrooms.png">
+
+	</blockquote>
+
+	<h2>Demo 09 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo09_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo09_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo09_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

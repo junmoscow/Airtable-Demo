@@ -1,0 +1,140 @@
+<html>
+	<title>Demo 12: Drive Bot Project (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 12: Drive Bot Project</h1>
+
+  <p>This project-demo shows how to use buttons to drive a robot.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>This is the same setup as the Simple Button demo. The "Name" column has an
+			entry "command" that will hold the updated values from the different Buttons.
+		</p>
+
+		<img class="documentation_image" src="./img/demo12_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo12_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>The interface is a sequence of buttons.  An HTML Table element is used
+			to organize the buttons into a grid.  Each button changes the "command"
+			value to something different ("Forward", "Backward", "Left", "Right", "Stop").
+		</p>
+
+		<img class="documentation_image" src="./img/demo12_remote_code.png">
+
+		<p>This is what the interface will look like on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo12_remote_interface.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo12_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local page is monitoring the command value. A sequence of checks look
+			for all potential values, and each is associated with a SPIKE Prime Slot.</p>
+
+		<img class="documentation_image" src="./img/demo12_local_code.png">
+
+		<p>This is how the interface will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo12_local_interface.png">
+
+	</blockquote>
+
+	<h3>SPIKE Prime MicroPython Code</h3>
+
+	<blockquote>
+
+		<p><b>Example Code for SPIKE Prime Hub Slot #0:</b></p>
+
+		<div class="documentation_code"><pre>
+<code># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import MotorPair
+# motors connected to A and B:
+my_motors = MotorPair('A','B')
+# Forward
+my_motor.start_tank(50,50)</code></pre></div>
+
+		<p><b>Example Code for SPIKE Prime Hub Slot #1:</b></p>
+
+		<div class="documentation_code"><pre>
+<code># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import MotorPair
+# motors connected to A and B:
+my_motors = MotorPair('A','B')
+# Backward
+my_motor.start_tank(-50,-50)</code></pre></div>
+
+		<p><b>Example Code for SPIKE Prime Hub Slot #2:</b></p>
+
+		<div class="documentation_code"><pre>
+<code># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import MotorPair
+# motors connected to A and B:
+my_motors = MotorPair('A','B')
+# Left
+my_motor.start_tank(-50,50)</code></pre></div>
+
+		<p><b>Example Code for SPIKE Prime Hub Slot #3:</b></p>
+
+		<div class="documentation_code"><pre>
+<code># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import MotorPair
+# motors connected to A and B:
+my_motors = MotorPair('A','B')
+# Right
+my_motor.start_tank(50,-50)</code></pre></div>
+
+	</blockquote>
+
+	<h2>Demo 12 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo12_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo12_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo12_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<html>
+	<title>Demo 02: Range Sliders (Local)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<!-- SERVICE DOCK -->
+	<div id="servicedock">
+		<service-airtable id="service_airtable" tablename="demo02"></service-airtable>
+		<service-spike id="service_spike"></service-spike>
+	</div>
+
+	<h1>Demo 02: Range Sliders</h1>
+
+  <p>This demo shows how to use range sliders to allow user to select a number.</p>
+
+  <h2>Local Interface</h2>
+
+	<div class="cloud_check">
+		<b><em>Monitor Cloud:</em></b>
+
+	  <div type="cloud_check" cloud_compare="changes" cloud_action="download_code">
+			<input type=text id="cloud_name" value="motor_speed">
+      <input type=text id="cloud_value" value="0">
+      <input type=text id="cloud_action_val" value="0">
+      <textarea id="cloud_code">from spike import Motor
+# motor connected to A:
+my_motor = Motor('A')
+# replace with speed value from cloud
+my_motor.start(REPLACE[cloud_current])
+</textarea>
+    </div>
+
+	</div>
+
+	<h2>Demo 02 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo02_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo02_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo02_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

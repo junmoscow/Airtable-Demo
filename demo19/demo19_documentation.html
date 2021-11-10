@@ -1,0 +1,189 @@
+<html>
+	<head>
+		<title>Demo 19: Two Player Rock-Paper-Scissors Project (Documentation)</title>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 19: Two Player Rock-Paper-Scissors Project</h1>
+
+  <p>This project-demo shows two-way communication as well as using two
+    SPIKE Primes that are remotely located from each other.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Project Design</h3>
+
+	<blockquote>
+
+		<p>Here is an overview of how the project is structured/flows.</p>
+
+		<img class="documentation_image" src="./img/demo19_overview.png">
+
+	</blockquote>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The Airtable is set up as follows:
+			<ul>
+				<li><em>p1_throw</em>: holds Player 1 status information</li>
+				<li><em>p2_throw</em>: holds Player 2 status information</li>
+			</ul>
+		</p>
+
+		<img class="documentation_image" src="./img/demo19_airtable.png">
+
+	</blockquote>
+
+	<h3>Player 1 Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo19_servicedock.png">
+
+		<p><b>Interface</b></p>
+
+		<p></p>
+
+		<img class="documentation_image" src="./img/demo19_code.png">
+
+		<p>This is what the interface will look like for Player 1 (after the game has been played):</p>
+
+		<img class="documentation_image" src="./img/demo19_interface.png">
+
+		<p>Note that, also within the HTML code, is the Cloud Monitoring elements.
+			These are all hidden from view, but are still in the page, activated, and
+			monitoring the Cloud for changes.</p>
+
+		<p>For debugging, to see these rendered in the page, change the
+			<code>style="display: none"</code> to be <code>style="display: inline"</code></p>
+
+		<img class="documentation_image" src="./img/demo19_monitor.png">
+
+		<p>Here are all the <b>JavaScript Functions</b> that help the page run:</p>
+
+		<p><code>onload_pre()</code>: this function runs when the page loads,
+			and is designed to "reset" everything (page elements, style, etc)</p>
+
+		<img class="documentation_image" src="./img/demo19_javascript_onloadpre.png">
+
+		<p>Note: the styles used by the page are as follows. Beyond formatting, this
+			also has <em>highlight</em> (color the table element gray) and <em>select</em>
+			(color the table element green) for the user selecting their throw choice.</p>
+
+		<img class="documentation_image" src="./img/demo19_style.png">
+
+		<p><code>onload_post()</code>: this function runs after the Cloud Service
+			has been configured and started. It monitors (to make sure the Cloud Service
+			is Active) and then clears out the <code>p1_throw</code> and
+			<code>p2_throw</code> values in the Cloud.</p>
+
+		<img class="documentation_image" src="./img/demo19_javascript_onloadpost.png">
+
+		<p>When the Play Game button is pushed, the <code>p1_throw</code> value is
+			updated, and the monitor will trigger the <code>start_game()</code> function.
+			This function reveals the throw-selector table, and then starts monitoring
+			the motor (see next function).
+		</p>
+
+		<img class="documentation_image" src="./img/demo19_javascript_startgame.png">
+
+		<p>The <code>monitor_motor()</code> function constantly checks the SPIKE Prime's
+			motor position (<code>mySPIKE.Motor('A').get_position()</code>) and based
+			on the position determines what type of throw the user wants. (The motor
+			position is passed to <code>eval_motor_position</code> that passes back
+			a string of "rock", "paper", or "scissors".)</p>
+
+		<p>The Force Sensor is monitored (<code>mySPIKE.ForceSensor('B').is_pressed()</code>)
+			and when pressed, the Cloud Name <code>p1_throw</code> is set to whatever
+			the current choice is ("rock", "paper", or "scissors").</p>
+
+		<img class="documentation_image" src="./img/demo19_javascript_monitormotor.png">
+
+		<p>When the <code>p1_throw</code> value changes to "rock", "paper", or "scissors"
+			(as monitored by the Cloud Monitoring elements in the HTML), the
+			<code>game_throw()</code> function is triggered. The main functionality of this
+			is to then "wait for Player 2 to make their choice." This is achieved by
+			constantly calling the <code>monitor_throw()</code> function that checks
+			the <code>p2_throw</code> value to see if the opponent has thrown yet.</p>
+
+		<img class="documentation_image" src="./img/demo19_javascript_gamethrow.png">
+
+		<p>When both <code>p1_throw</code> and <code>p2_throw</code> have been thrown,
+			it is time to <code>show_result()</code>: even though the result is already
+			known, this function does a countdown ("3" ... "3" ... "1" ... on the
+			SPIKE Prime LED Matrix) routine and then (1) displays what Player 1 threw
+			on the SPIKE Prime LED Matrix and (2) shows the overall result (Win, Lose, Tie)
+			in the webpage.</p>
+
+		<img class="documentation_image" src="./img/demo19_javascript_showresult.png">
+
+	</blockquote>
+
+	<h3>Player 2 Page Setup</h3>
+
+	<blockquote>
+
+		<p>The <b>Player 2 Page</b> setup is identical to the Player 1 page, but
+			switches the references from "Player 1" (and <code>p1_throw</code>) to
+			"Player 2" (and <code>p2_throw</code>).</p>
+
+		<p>Here are all the differences between demo19_player1.html and demo19_player2.html</p>
+
+		<p>Title of the page:</p>
+
+		<img class="documentation_image" src="./img/demo19_player2_title.png">
+
+		<p>Updating the Cloud value when Force Sensor is pressed:</p>
+
+		<img class="documentation_image" src="./img/demo19_player2_force.png">
+
+		<p>A debugging statement (when the throw happens):</p>
+
+		<img class="documentation_image" src="./img/demo19_player2_gamethrow.png">
+
+		<p>Getting the right value of the opponents throw (in monitor throw):</p>
+
+		<img class="documentation_image" src="./img/demo19_player2_monitorthrow.png">
+
+		<p>In show result, getting the right throw:</p>
+
+		<img class="documentation_image" src="./img/demo19_player2_showresult.png">
+
+		<p>Within the HTML of the page, making sure the right player info is shown
+			and the Play Game button updates the proper field.</p>
+
+		<img class="documentation_image" src="./img/demo19_player2_html.png">
+
+		<p>All the Monitor Cloud values monitor the Player 2 (<code>p2_throw</code>)
+			value instead:</p>
+
+		<img class="documentation_image" src="./img/demo19_player2_monitor.png">
+
+	</blockquote>
+
+	<h2>Demo 19 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo19_player1.html" target=_blank>Player 1 Page</a></li>
+      <li><a href="./demo19_player2.html" target=_blank>Player 2 Page</a></li>
+      <li><a href="./demo19_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

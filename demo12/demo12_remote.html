@@ -1,0 +1,44 @@
+<html>
+  <title>Demo 12: Drive Bot Project (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo12"></service-airtable>
+  </div>
+
+  <h1>Demo 12: Drive Bot Project</h1>
+
+  <p>This project-demo shows how to use buttons to drive a robot.</p>
+
+  <h2>Remote Interface</h2>
+
+  <!-- table helps position elements in the page -->
+  <table style="padding: 10px;">
+    <tr><td></td><td align="center"><button cloud_action='update' cloud_name='command'>Forward</button></td><td></td></tr>
+    <tr>
+      <td align="center"><button cloud_action='update' cloud_name='command'>Left</button></td>
+      <td align="center"><button cloud_action='update' cloud_name='command'>Stop</button></td>
+      <td align="center"><button cloud_action='update' cloud_name='command'>Right</button></td>
+    </tr>
+    <tr><td></td><td align="center"><button cloud_action='update' cloud_name='command'>Backward</button></td><td></td></tr>
+  </table>
+
+  <h2>Demo 12 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo12_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo12_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo12_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html>
+	<title>Demo 14: Math Bot Project (Local)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<!-- SERVICE DOCK -->
+	<div id="servicedock">
+		<service-airtable id="service_airtable" tablename="demo14"></service-airtable>
+		<service-spike id="service_spike"></service-spike>
+	</div>
+
+	<h1>Demo 14: Math Bot Project</h1>
+
+  <p>This project-demo shows how to create an interactive robot that solves user supplied math problems.</p>
+
+  <h2>Local Interface</h2>
+
+	<div class="cloud_check">
+		<b><em>Monitor Cloud:</em></b>
+
+	  <div type="cloud_check" cloud_compare="equal" cloud_action="download_code">
+			<input type=text id="cloud_name" value="command">
+			<input type=text id="cloud_value" value="ADD">
+      <input type=text id="cloud_action_val" value="0">
+			<textarea id="cloud_code"># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import PrimeHub
+hub = PrimeHub()
+number1 = CLOUD[number1]
+number2 = CLOUD[number2]
+summation = number1 + number2
+hub.light_matrix.write(str(number1) + ' + ' + str(number2) + ' = ' + str(summation))</textarea>
+			<input type=text id="cloud_reset" value="">
+    </div>
+
+	</div>
+
+	<h2>Demo 14 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo14_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo14_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo14_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<html>
+	<title>Demo 04: Select Dropdown (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 04: Select Dropdown</h1>
+
+  <p>This demo shows how to use a select dropdown for user to supply content.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The "Name" column has an entry "command" that will hold the updated
+			command from the Select Box.</p>
+
+		<img class="documentation_image" src="./img/demo04_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo04_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>This select box (<code>&lt;select ...&gt;</code>) will update the
+			"command" when a new item (<code>&lt;option ...&gt;</code>) in the select box is picked.
+		</p>
+
+		<img class="documentation_image" src="./img/demo04_remote_code.png">
+
+		<p>This is how the text box will look on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo04_remote_interface.png">
+
+		<p>Notes:
+			<ul>
+				<li>Multiselect boxes are supported; use the "cloud_join" to specify a
+					value to join all the selected options before storing in the cloud.</li>
+				<li>If the "cloud_value" attribute isn't used with the option tag,
+					the innerHTML of the option tag will be used instead.</li>
+			</ul>
+		</p>
+
+		<p>Example of multi-select:</p>
+
+		<img class="documentation_image" src="./img/demo04_remote_code2.png">
+
+		<p>Example of missing cloud_value attribute (and using an empty cloud_join value,
+			which just concatinates all values together):</p>
+
+		<img class="documentation_image" src="./img/demo04_remote_code3.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo04_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local interface is set up identical to the Demo 01: Simple Button demo.</p>
+
+		<img class="documentation_image" src="./img/demo04_local_code.png">
+
+		<p>This is how this element will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo04_local_interface.png">
+
+	</blockquote>
+
+	<h2>Demo 04 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo04_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo04_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo04_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

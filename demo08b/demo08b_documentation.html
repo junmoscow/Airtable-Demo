@@ -1,0 +1,99 @@
+<html>
+	<title>Demo 08b: Form Input with Textarea (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 08b: Form Input with Textarea</h1>
+
+  <p>This demo shows how to use a form input, with a textarea element (multiline text).</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The "Name" column has an entry "code" that will hold the updated
+			code being sent from the Textarea.</p>
+
+		<p><em><b>NOTE:</b> the value column is of field type "Long text"</em></p>
+
+		<img class="documentation_image" src="./img/demo08b_airtable.png">
+
+		<p>In Airtable, to change the type of a column, use the "Customize field type"
+			option to select "Long text" as the type of the Value.  This allows
+			long multiline text that includes "new line characters."
+		</p>
+
+		<img class="documentation_image" src="./img/demo08b_airtable_type.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo08b_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>The textarea can hold multiline plain text. Then the submit button triggers
+			the contents of the textarea to be sent to the cloud.</p>
+
+		<img class="documentation_image" src="./img/demo08b_remote_code.png">
+
+		<p>This is how the interface will look on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo08b_remote_interface.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo08b_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local page is the same as Demo 05: Textarea.</p>
+
+		<img class="documentation_image" src="./img/demo08b_local_code.png">
+
+		<p>This is how the element will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo08b_local_interface.png">
+
+	</blockquote>
+
+	<h2>Demo 08b Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo08b_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo08b_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo08b_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

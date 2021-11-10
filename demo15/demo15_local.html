@@ -1,0 +1,64 @@
+<html>
+	<title>Demo 15: Music Player Project (Local)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<!-- SERVICE DOCK -->
+	<div id="servicedock">
+		<service-airtable id="service_airtable" tablename="demo15"></service-airtable>
+		<service-spike id="service_spike"></service-spike>
+	</div>
+
+	<h1>Demo 15: Music Player Project</h1>
+
+  <p>This project-demo shows how to create a robot that plays music.</p>
+
+  <h2>Local Interface</h2>
+
+	<div class="cloud_check">
+		<b><em>Monitor Cloud:</em></b>
+
+	  <div type="cloud_check" cloud_compare="changes" cloud_action="download_code">
+			<input type=text id="cloud_name" value="notes">
+      <input type=text id="cloud_action_val" value="0">
+			<textarea id="cloud_code"># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import Speaker
+sound = Speaker()
+
+def play_C():
+    sound.beep(note=60, seconds=0.4)
+def play_D():
+    sound.beep(note=62, seconds=0.4)
+def play_E():
+    sound.beep(note=64, seconds=0.4)
+
+note_sequence = 'REPLACE[cloud_current]'
+for note in note_sequence:
+    if note == 'C':
+        play_C()
+    if note == 'D':
+        play_D()
+    if note == 'E':
+        play_E()</textarea>
+			<input type=text id="cloud_reset" value="">
+    </div>
+
+	</div>
+
+	<h2>Demo 15 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo15_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo15_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo15_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

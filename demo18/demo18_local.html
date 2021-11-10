@@ -1,0 +1,67 @@
+<html>
+	<title>Demo 18: SPIKE Prime MicroPython IDE (Local)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+		<script>
+			// function to take submitted value (the code) and download and run on the SPIKE Prime
+			function download_code(name, value) {
+				var slot_id = 0;
+				try { slot_id = parseInt(cloud_get("slot_id")); } // if error, stick with default
+				catch(err) { console.log("Download Code Error: no slot_id"); }
+				var program_name = "";
+				try { program_name = cloud_get("program_name"); } // if error, stick with default
+				catch(err) { console.log("Download Code Error: no program_name"); }
+				mySPIKE.writeProgram(program_name, value, slot_id, function () { mySPIKE.executeProgram(slot_id); });
+			}
+		</script>
+	</head>
+<body>
+
+	<!-- SERVICE DOCK -->
+	<div id="servicedock">
+		<service-airtable id="service_airtable" tablename="demo18"></service-airtable>
+		<service-spike id="service_spike"></service-spike>
+	</div>
+
+	<h1>Demo 18: SPIKE Prime MicroPython IDE Project</h1>
+
+  <p>This project-demo creates a browser-based SPIKE Prime MicroPython
+    IDE for remotely programming a SPIKE Prime.</p>
+
+  <h2>Local Interface</h2>
+
+	<div class="cloud_check">
+		<b><em>Monitor Cloud:</em></b>
+
+		<p>Note: <em>slot_id</em> and <em>program_name</em> are updated/stored in
+			the cloud and don't need to be monitored.</p>
+
+		<div type="cloud_check" cloud_compare="changes" cloud_action="run_js">
+			<input type=text id="cloud_name" value="code">
+      <input type=text id="cloud_action_val" value="download_code">
+			<input type=text id="cloud_reset" value="">
+    </div>
+
+		<div type="cloud_check" cloud_compare="equal" cloud_action="stop_slot">
+		    <input type=text id="cloud_name" value="command">
+		    <input type=text id="cloud_value" value="Stop Program">
+				<input type=text id="cloud_reset" value="">
+		</div>
+
+	</div>
+
+	<h2>Demo 18 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo18_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo18_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo18_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

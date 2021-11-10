@@ -1,0 +1,35 @@
+<html>
+  <title>Demo 10: Custom JavaScript Functions (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo10"></service-airtable>
+  </div>
+
+  <h1>Demo 10: Custom JavaScript Functions</h1>
+
+  <p>This demo shows how to use custom JavaScript functions for controlling the SPIKE Prime.</p>
+
+  <h2>Remote Interface</h2>
+
+  <input type=range cloud_action='update' cloud_name='motor_speed' cloud_min='-100' cloud_max='100' min='-100' max='100' value='0' />
+
+  <h2>Demo 10 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo10_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo10_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo10_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

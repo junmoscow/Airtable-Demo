@@ -1,0 +1,43 @@
+<html>
+  <title>Demo 13: Shooter Project (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo13"></service-airtable>
+  </div>
+
+  <h1>Demo 13: Shooter Project</h1>
+
+  <p>This project-demo shows how to adjust motor positions in a shooter robot.</p>
+
+  <h2>Remote Interface</h2>
+
+  <p>Set horizontal angle:
+    <input type=range cloud_action='update' cloud_name='position_horizontal' cloud_min='0' cloud_max='359' min='0' max='359' value='0'>
+  </p>
+
+  <p>Set vertical angle:
+    <input type=range cloud_action='update' cloud_name='position_vertical' cloud_min='0' cloud_max='359' min='0' max='359' value='0'>
+  </p>
+
+  <p><button cloud_action='update' cloud_name='command'>Aim and Shoot</button></p>
+
+  <h2>Demo 13 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo13_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo13_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo13_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

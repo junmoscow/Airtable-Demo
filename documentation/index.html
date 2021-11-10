@@ -1,0 +1,179 @@
+<html>
+<head>
+  <title>Documentation</title>
+  <style>
+    .table_of_contents {
+  		position: fixed;
+  		top: 10px;
+  		right: 10px;
+  		border: 1px solid black;
+  		background-color: lightyellow;
+  		padding: 5px;
+  	}
+  </style>
+</head>
+<body>
+
+  <div class="table_of_contents">
+    <b>Contents:</b>
+    <ul>
+      <li><a href="#airtable">Setting up Airtable</a></li>
+      <li><a href="#remote">Creating Remote File</a></li>
+      <li><a href="#local">Creating Local File</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+  </div>
+
+  <h1>Web-Based SPIKE Prime Control Documentation</h1>
+
+  <p>This documentation describes how to setup and create interactive web-based interfaces
+    for controlling the SPIKE Prime.</p>
+
+  <p>It was originally created by Ethan Danahy in November and December 2020
+    for use by his first-year engineering course at Tufts University.
+  </p>
+
+  <a name="airtable"></a>
+  <h2>Setting up Airtable</h2>
+
+  <blockquote>
+
+    <p>See Canvas for instructions on creating an Airtable account.</p>
+
+    <p>To access your Airtable data remotely, you need three things:
+      <ul>
+        <li>Your Airtable API Key (found under your <a href="https://airtable.com/account" target=_blank>Airtable Account</a> settings); it should look like "keyXXXXXXXXXXXXX"</li>
+        <li>Your Base ID (found under your <a href="https://airtable.com/api" target=_blank>REST API</a> settings); it should look like "appYYYYYYYYYYYYYYY"</li>
+        <li>The name of your table (e.g. "myProject" or "demo01" etc)</li>
+      </ul>
+    </p>
+
+    <p>The Airtable API and the Base ID need to be entered into the <b>"/src/secret.js"</b> file.
+      Here is the location of that file in the folder structure:</p>
+
+    <img src="./img/secret_file_location.png">
+
+    <p>Inside that file, you should be updating lines #19 (Airtable API Key) and #20 (Airtable Base ID):</p>
+
+    <img src="./img/Cloud_API.png">
+
+    <p>Notes:
+      <ul>
+        <li>You can see that the API key variable is "split" with <em>"key"</em> separated from the random string you've been assigned</li>
+        <li>You can see that the Base ID variable is "split" with <em>"app"</em> separated from the random string you've been assigned</li>
+        <li>Ignore the "SystemLink" portion of the page; we are using Airtable and not SystemLink for this project.</li>
+      </ul>
+    </p>
+
+    <p>Then for each page you create (remote, local, etc) that you want to
+      access a data table within Airtable, you need to specify your Table Name.
+      Make sure you enter it into any/every page where you are connecting to Airtable.
+    </p>
+
+    <p>Here is an example from <b><em>myProject_remote.html</em></b> showing that
+      the Airtable tablename of "myProject" has been entered into the ServiceDock on line 13.
+    </p>
+
+    <img src="./img/myProject_remote_servicedock.png">
+
+  </blockquote>
+
+  <a name="remote"></a>
+  <h2>Creating Remote File</h2>
+
+  <blockquote>
+
+    <p>The header of the <b>Remote</b> page needs to include the following:
+      <ul>
+        <li>The ServiceDock code, hosted externally at cdn.jsdelivr.net.</li>
+        <li>A reference to "secret.js" that has your Airtable API Key and Base ID information.</li>
+        <li>Including all the code from "cloud.js" that renders the page and does all the cloud communication.</li>
+        <li>Import in "style.css" that has some style sheet information.</li>
+      </ul>
+    </p>
+
+    <img src="./img/myProject_remote_head.png">
+
+    <p>In addition to these essential files, you can add to this head your own:
+      <ul>
+        <li>Style information for formatting the document.  This can use the <code>&lt;style&gt;</code> tag.</li>
+        <li>Custom JavaScript functions for creating an interactive interfaces. These can use a new <code>&lt;script&gt;</code> tag.<li>
+      </ul>
+    </p>
+
+    <p>In the body of the document you need to include the Service Dock that performs the connection to Airtable.
+      Make sure you update the <em>tablename</em> to reference the table you want to use in your project.</p>
+
+    <img src="./img/myProject_remote_servicedock.png">
+
+  </blockquote>
+
+  <a name="local"></a>
+  <h2>Creating Local File</h2>
+
+  <blockquote>
+
+    <p>The header of the <b>Local</b> page needs to include the following:
+      <ul>
+        <li>The ServiceDock code, hosted externally at cdn.jsdelivr.net.</li>
+        <li>A reference to "secret.js" that has your Airtable API Key and Base ID information.</li>
+        <li>Including all the code from "cloud.js" that renders the page and does all the cloud communication.</li>
+        <li>Import in "style.css" that has some style sheet information.</li>
+      </ul>
+    </p>
+
+    <img src="./img/myProject_local_head.png">
+
+    <p>In addition to these essential files, you can add to this head your own:
+      <ul>
+        <li>Style information for formatting the document.  This can use the <code>&lt;style&gt;</code> tag.</li>
+        <li>Custom JavaScript functions for creating an interactive interfaces. These can use a new <code>&lt;script&gt;</code> tag.<li>
+      </ul>
+    </p>
+
+    <p>In the body of the document you need to include the Service Dock that
+      performs both the connection to Airtable as well as connecting to the SPIKE Prime.
+      <ul>
+        <li>For Airtable: make sure you update the <em>tablename</em> to reference
+          the table you want to use in your project.</li>
+        <li>For SPIKE Prime: make sure you are using a Chrome Browser and
+          activate the SPIKE Prime prior to your code running.</li>
+      </ul>
+    </p>
+
+    <img src="./img/myProject_local_servicedock.png">
+
+    <p><b><em>Reminder about SPIKE Prime:</em></b></p>
+
+    <blockquote>
+      <p>
+        <b>To use the SPIKE™ Prime hardware,</b> you must be using a recent version of the <a href="https://www.google.com/chrome/">Google Chrome browser</a>.</p>
+    </blockquote>
+
+  </blockquote>
+
+  <a name="examples"></a>
+  <h2>Examples</h2>
+
+  <blockquote>
+
+    <p>Additional documentation including examples coming soon.</p>
+
+    <p><b>For now:</b> see the <a href="../index.html">other demos and documentation</a></p>
+
+  </blockquote>
+
+  <!-- footer -->
+  <hr />
+
+  <p>Project and Documentation created by Tufts Center for Engineering Education and Outreach:</p>
+
+  <p>
+    <a href="http://ceeo.tufts.edu" target=_blank><img src="./img/TuftsCEEO.png"></a>
+    <br><br>
+    For more information about Tufts CEEO, please visit: <a href="http://ceeo.tufts.edu" target=_blank>http://ceeo.tufts.edu</a>
+  </p>
+
+  <p>For other experimental projects from Tufts CEEO: <a href="http://ceeoinnovations.org" target=_blank>CEEO Innovations</a></p>
+
+</body></html>

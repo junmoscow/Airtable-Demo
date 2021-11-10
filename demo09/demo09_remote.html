@@ -1,0 +1,121 @@
+<html>
+  <title>Demo 09: Input Queue (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+    <script>
+      function command_add(queue, command) {
+        var new_option = document.createElement("option");
+        new_option.text = command;
+        document.getElementById(queue).add(new_option);
+      }
+      function command_move(queue, direction) {
+        var selectList = document.getElementById(queue);
+        // if any are selected:
+        if (selectList.selectedOptions.length > 0) {
+          var selectOptions = selectList.getElementsByTagName('option');
+          // this code is from: https://www.tomred.net/css-html-js/reorder-option-elements-of-an-html-select.html
+          if (direction == "UP") {
+            for (var i = 1; i < selectOptions.length; i++) {
+              var opt = selectOptions[i];
+              if (opt.selected) {
+                selectList.removeChild(opt);
+                selectList.insertBefore(opt, selectOptions[i - 1]);
+              }
+            }
+          } else if (direction == "DOWN") {
+            for (var i = selectOptions.length - 2; i >= 0; i--) {
+              var opt = selectOptions[i];
+              if (opt.selected) {
+                var nextOpt = selectOptions[i + 1];
+                opt = selectList.removeChild(opt);
+                nextOpt = selectList.replaceChild(opt, nextOpt);
+                selectList.insertBefore(nextOpt, opt);
+              }
+            }
+          }
+        }
+      }
+      function command_delete(queue) {
+        var selectList = document.getElementById(queue);
+        // if any are selected:
+        if (selectList.selectedOptions.length > 0) {
+          var selectOptions = selectList.getElementsByTagName('option');
+          // go from back of the list to the front
+          for (var i = selectOptions.length - 1; i >= 0; i--) {
+            if (selectOptions[i].selected) { selectList.remove(i); }
+          }
+        }
+      }
+      function command_submit(queue, output) {
+        var selectList = document.getElementById(queue);
+        var outputText = "";
+        var join_val = "\n"; // new line
+        // go through each, and add it to the output
+        for (var i=0; i<selectList.options.length; i++) {
+          outputText += selectList.options[i].text;
+          if (i<selectList.options.length-1) {
+            // all but the LAST one, add the join character
+            outputText += join_val;
+          }
+        }
+        // set the value to be the result
+        document.getElementById(output).value = outputText;
+        return true;
+      }
+    </script>
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo09"></service-airtable>
+  </div>
+
+  <h1>Demo 09: Input Queue</h1>
+
+  <p>This demo shows how to use an input queue to input a sequence of actions.</p>
+
+  <h2>Remote Interface</h2>
+
+  <p>Command Control:</p>
+
+  <button onclick='command_add("commands_queue", "Forward");'>Forward</button>
+  <button onclick='command_add("commands_queue", "Backward");'>Backward</button>
+  <button onclick='command_add("commands_queue", "Left");'>Left</button>
+  <button onclick='command_add("commands_queue", "Right");'>Right</button>
+
+  <p>Command List:</p>
+
+  <select id='commands_queue' multiple size='10' style='width: 200px;'>
+  </select>
+
+  <p>Edit Commands (select and click):</p>
+
+  <button onclick='command_move("commands_queue","UP");'>Move Up</button>
+  <button onclick='command_move("commands_queue","DOWN");'>Move Down</button>
+  <button onclick='command_delete("commands_queue");'>Delete</button>
+
+  <p>Submit and Run Commands:</p>
+
+  <form cloud_form='textarea'>
+    <!-- ADD the style='display: none' attribute to the textarea to hide it -->
+    <textarea id='queue_submit' cloud_action='update' cloud_name='commands' style='width: 200px;' rows=5></textarea>
+    <br />
+    <input type=submit value='Submit and Run Commands' onclick='return command_submit("commands_queue","queue_submit");' />
+  </form>
+
+  <h2>Demo 09 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo09_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo09_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo09_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

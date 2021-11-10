@@ -1,0 +1,172 @@
+<html>
+	<title>Demo 17: Random Number Match Project (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 17: Random Number Match Project</h1>
+
+  <p>This project-demo challenges the user to match a random number.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The Airtable is set up as follows:
+			<ul>
+				<li><em>command</em>: used to trigger the different steps of the project (Generate, Show) associated with buttons</li>
+				<li><em>current_length</em>: how much of the sequence to show (starts at 1, grows when they get it right)</li>
+				<li><em>sequence</em>: this will hold the randomly generated sequence (aka. ground truth)</li>
+				<li><em>sequence_guess</em>: the user's guess will be entered here when they make a guess</li>
+			</ul>
+		</p>
+
+		<img class="documentation_image" src="./img/demo17_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo17_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>The interface walks the user through the game:
+			<ol>
+				<li>Generating a new random sequence of numbers</li>
+				<li>Showing the current sequence (sub-sequence of increasing length)</li>
+				<li>Allowing user to guess the sequence</li>
+				<li>and 5. Providing instructions if they get it right/wrong</li>
+			</ol>
+		</p>
+
+		<img class="documentation_image" src="./img/demo17_remote_code.png">
+
+		<p>This is what the interface will look like on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo17_remote_interface.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo17_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local page is monitoring "command" and "sequence_guess" Airtable values:
+			<ul>
+				<li>if "command" equals "Generate" then a new sequence is generated (via the JavaScript function <code>generate_sequence</code>)</li>
+				<li>if "command" equals "Show" then the sequence is shown (via the MicroPython code downloaded into Slot #1)</li>
+				<li>if "sequence_guess" changes, then the user submitted a new guess and it should be evalauted (via the JavaScript function <code>compare_sequence</code>)</li>
+			</ul>
+		</p>
+
+		<p>Each of these resets the field back to blank, so it will re-run if the user activates/changes it again.</p>
+
+		<img class="documentation_image" src="./img/demo17_local_code.png">
+
+		<p>This is how the interface will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo17_local_interface.png">
+
+		<p><b>Notes:</b></p>
+
+		<p>The JavaScript functions are as follows:
+			<ul>
+				<li><em>generate_sequence</em>:
+					<ol>
+						<li>since starting over, resets the stored length to "1" (and updates Airtable)</li>
+						<li>generates a new random sequence of characters (digits "0" to "9") that is 20-characters in length (and updates Airtable)</li>
+						<li>runs the program sitting in Slot #0 (this is a "dummy" program that makes it look like it's doing work; see MicroPython below)</li>
+					</ol>
+				</li>
+				<li><em>compare_sequence</em>:
+					<ol>
+						<li>looks up the "current sequence" and "current guess" from the database</li>
+						<li>does a "substring" on current sequence to make sure the right length</li>
+						<li>compares the two to see if equal
+							<ul>
+								<li>IF EQUAL: displays "yes" and increments length (so sequence gets longer/harder for next round)</li>
+								<li>IF NOT EQUAL: then displays "no" and doesn't change anything (in case user wants to guess again)</li>
+							</ul>
+						</li>
+					</ol>
+				</li>
+			</ul>
+		</p>
+
+		<img class="documentation_image" src="./img/demo17_local_javascript.png">
+
+		<p>Note: to develop the code for displaying the sequence I used CodingRooms
+			to write the prototype code, using
+			test values for the length (see line 5: <code>length = 3</code>) and the sequence
+			of random values (see line 6: <code>sequence = 'abcdef'</code>; note I used
+			letters instead of numbers, but it doesn't really matter what it was).
+			Then when I moved the code from
+			CodingRooms over to my webpage, I then replaced the length value (3) with
+			"CLOUD[current_length]" and the sequence with "CLOUD[sequence]" in order
+			for them to be replaced with the current values stored in the cloud.</p>
+
+			<img class="documentation_image" src="./img/demo17_local_codingrooms.png">
+
+	</blockquote>
+
+	<h3>SPIKE Prime MicroPython Code</h3>
+
+	<blockquote>
+		<p>"Slot #0" holds a program that makes it look like it's doing work, but
+			really just displaying a sequence of images.</p>
+
+		<p><b>Example Code for SPIKE Prime Hub Slot #0</b></p>
+
+		<div class="documentation_code"><pre><code># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import PrimeHub, LightMatrix
+from spike.control import wait_for_seconds
+hub = PrimeHub()
+for num_times in range(3):
+    for i in range(1,12): # numbers 1 to 12
+        hub.light_matrix.show_image('CLOCK' + str(i))
+        wait_for_seconds(0.1)
+hub.light_matrix.show_image('YES')
+wait_for_seconds(1)
+hub.light_matrix.off()</code></pre></div>
+
+	</blockquote>
+
+	<h2>Demo 17 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo17_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo17_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo17_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+	<title>Demo 08b: Form Input with Textarea (Local)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<!-- SERVICE DOCK -->
+	<div id="servicedock">
+		<service-airtable id="service_airtable" tablename="demo08b"></service-airtable>
+		<service-spike id="service_spike"></service-spike>
+	</div>
+
+	<h1>Demo 08b: Form Input with Textarea</h1>
+
+  <p>This demo shows how to use a form input, with a textarea element (multiline text).</p>
+
+	<h2>Local Interface</h2>
+
+	<div class="cloud_check">
+		<b><em>Monitor Cloud:</em></b>
+
+		<div type="cloud_check" cloud_compare="changes" cloud_action="download_code">
+			<input type=text id="cloud_name" value="code">
+      <input type=text id="cloud_action_val" value="0">
+      <textarea id="cloud_code">REPLACE[cloud_current]</textarea>
+			<input type=text id="cloud_reset" value="">
+    </div>
+
+	</div>
+
+	<h2>Demo 08b Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo08b_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo08b_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo08b_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

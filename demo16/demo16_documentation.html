@@ -1,0 +1,143 @@
+<html>
+	<title>Demo 16: LED Toggle Project (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 16: LED Toggle Project</h1>
+
+  <p>This project-demo shows how to create an interface that toggles the LEDs.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The Airtable is set up with 25 records, each one for an individual pixel
+			in the 5x5 light matrix array. Each is initialized to zero: but will toggle
+			between "0" and "100".
+		</p>
+
+		<img class="documentation_image" src="./img/demo16_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo16_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>The interface has two parts:
+			<ol>
+				<li>The left is a series of buttons that toggle through values (0, 100)
+					and store them in the cloud</li>
+				<li>The right is a space to "load" in images to try and match. (This
+					just happens in the browser; it doesn't use the Cloud or SPIKE Prime at all.)</li>
+			</ol>
+		</p>
+
+		<p>Here is the table for generating the array of buttons. Note there is a
+			button at the top of the table (right side) for randomly generating the
+			match image.</p>
+
+		<p>Each "toggle button" updates that position (LED + row + col) in the Cloud
+			to be "0" (off) or "100" (on).</p>
+
+		<img class="documentation_image" src="./img/demo16_remote_code1.png">
+
+		<p>Here is the table for generating the matching image:</p>
+
+		<img class="documentation_image" src="./img/demo16_remote_code2.png">
+
+		<p>This is what the interface will look like on the Remote Page. There
+			are a collection of CSS Style attributes in the head of the document that
+			are used for formatting the tables.</p>
+
+		<img class="documentation_image" src="./img/demo16_remote_interface.png">
+
+		<p>This is the JavaScript that (1) has the images for matching and (2)
+			randomly picks one and displays it in the "match" table on the right.</p>
+
+		<img class="documentation_image" src="./img/demo16_remote_javascript.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo16_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local page is monitoring all the different entries in the Cloud. This is just
+			the same code over and over, each entry calling the <code>toggle_pixel</code> function.
+		</p>
+
+		<img class="documentation_image" src="./img/demo16_local_code.png">
+
+		<p>This is how the interface will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo16_local_interface.png">
+
+		<p>This is the JavaScript code for updating the SPIKE Prime's pixel when
+			the Cloud changes. We take in the name of the field (e.g. "LED34") and
+			parse out the row and column (3, 4) and then set the pixel to equal the
+			value ("0" or "100") in the Cloud.</p>
+
+		<img class="documentation_image" src="./img/demo16_local_javascript1.png">
+
+		<p>Note that we want to initialize the SPIKE Prime's light matrix to equal
+			whatever settings are in the Cloud when it first connects.  To do this we
+			are using several callback functions:
+			<ul>
+				<li><code>onload_post</code>: this function is called when the page loads
+					but <em>after</em> the Service Dock has been set up.</li>
+				<li><code>mySPIKE.executeAfterInit()</code>: this is set wtihin onload_post
+					to be called after the SPIKE Prime is initialized.  When it is (e.g. when
+					the user has connected the SPIKE Prime) we then want to go through
+					and update the display.</li>
+			</ul>
+		</p>
+
+		<p>The extra "sleep" has been added because if a sequence of JSON commands are
+			issued to the SPIKE Prime too quickly then it'll miss some.</p>
+
+		<img class="documentation_image" src="./img/demo16_local_javascript2.png">
+
+	</blockquote>
+
+	<h2>Demo 16 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo16_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo16_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo16_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

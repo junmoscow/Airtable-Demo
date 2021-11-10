@@ -1,0 +1,42 @@
+<html>
+  <title>Demo 08b: Form Input with Textarea (Remote)</title>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+    <script src="../src/secret.js" charset="utf-8"></script>
+    <script src="../src/cloud.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../src/style.css" />
+  </head>
+<body>
+
+  <!-- SERVICE DOCK -->
+  <div id="servicedock">
+    <service-airtable id="service_airtable" tablename="demo08b"></service-airtable>
+  </div>
+
+  <h1>Demo 08b: Form Input with Textarea</h1>
+
+  <p>This demo shows how to use a form input, with a textarea element (multiline text).</p>
+
+  <h2>Remote Interface</h2>
+
+  <form cloud_form='textarea'>
+    <textarea cloud_action='update' cloud_name='code' cols=60 rows=5>from spike import PrimeHub
+hub = PrimeHub()
+hub.light_matrix.write('Form with Textarea')
+</textarea>
+    <br>
+    <input type=submit />
+  </form>
+
+  <h2>Demo 08b Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo08b_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo08b_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo08b_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

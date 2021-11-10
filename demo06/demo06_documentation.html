@@ -1,0 +1,146 @@
+<html>
+	<title>Demo 06: Toggle Button (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 06: Toggle Button</h1>
+
+  <p>This demo shows how to use a button to toggle through a sequence of values.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>The "Name" column has an entry "motor_speed" that will hold the updated values
+			from the Toggle Button. The "Value" will be a number used to control the motor.</p>
+
+		<img class="documentation_image" src="./img/demo06_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo06_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>This button has cloud_action of "toggle" and includes a cloud_list of
+			values: clicking the button will iterate through the list and set the
+			cloud value to be each item in the list, in sequence, with each button click.
+		</p>
+
+		<img class="documentation_image" src="./img/demo06_remote_code.png">
+
+		<p>This is how the toggle button will look on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo06_remote_interface.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo06_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local interface is set up to monitor the "motor_speed" value. In this case
+			there are three scenarios: when the motor speed is low (less than 50), when it
+			equals 50, and when it is high (greater than 50). In each case a different
+			SPIKE Prime slot is run.
+		</p>
+
+		<p>Note there could have been other ways to accomplish this. It could have also
+			been done with a single element that "looks for any change" and replaces code
+			with whatever value it finds.
+		</p>
+
+		<img class="documentation_image" src="./img/demo06_local_code.png">
+
+		<p>This is how the elements will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo06_local_interface.png">
+
+	</blockquote>
+
+	<h3>SPIKE Prime MicroPython Code</h3>
+
+	<blockquote>
+
+		<p><b>Example Code for SPIKE Prime Hub Slot #0:</b></p>
+
+		<div class="documentation_code"><pre>
+<code># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import PrimeHub, Motor
+from spike.control import wait_for_seconds
+
+# motor connected to A:
+my_motor = Motor('A')
+my_motor.start(25) # slow
+wait_for_seconds(2)
+my_motor.stop()</code></pre></div>
+
+		<p><b>Example Code for SPIKE Prime Hub Slot #1:</b></p>
+
+		<div class="documentation_code"><pre>
+<code># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import PrimeHub, Motor
+from spike.control import wait_for_seconds
+
+# motor connected to A:
+my_motor = Motor('A')
+my_motor.start(50) # medium
+wait_for_seconds(2)
+my_motor.stop()</code></pre></div>
+
+<p><b>Example Code for SPIKE Prime Hub Slot #2:</b></p>
+
+<div class="documentation_code"><pre>
+<code># MicroPython for LEGO Hardware (LEGO Education's SPIKE Prime)
+from spike import PrimeHub, Motor
+from spike.control import wait_for_seconds
+
+# motor connected to A:
+my_motor = Motor('A')
+my_motor.start(75) # fast
+wait_for_seconds(2)
+my_motor.stop()</code></pre></div>
+
+	</blockquote>
+
+	<h2>Demo 06 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo06_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo06_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo06_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>

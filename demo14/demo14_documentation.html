@@ -1,0 +1,104 @@
+<html>
+	<title>Demo 14: Math Bot Project (Documentation)</title>
+	<head>
+		<script src="https://cdn.jsdelivr.net/gh/tuftsceeo/SPIKE-Web-Interface/cdn/ServiceDock.js" charset="utf-8"></script>
+	  <script src="../src/secret.js" charset="utf-8"></script>
+	  <script src="../src/cloud.js" charset="utf-8"></script>
+	  <link rel="stylesheet" href="../src/style.css" />
+	</head>
+<body>
+
+	<h1>Demo 14: Math Bot Project</h1>
+
+  <p>This project-demo shows how to create an interactive robot that solves user supplied math problems.</p>
+
+  <h2>Documentation</h2>
+
+	<p>Be sure to view the <a href="../documentation/index.html">overall Documentation</a> for configuring
+		the cloud storage (API key, Base ID, etc) and for more information on how the entire system works.</p>
+
+	<h3>Airtable Setup</h3>
+
+	<blockquote>
+
+		<p>This is the same setup as (1) Text Box and (2) Simple Button demos. The "Name" column has an
+			entries for "number1" and "number2" (controlled by two text boxes) and
+			a "command" that will be set to "ADD" when the button is pushed.
+		</p>
+
+		<img class="documentation_image" src="./img/demo14_airtable.png">
+
+	</blockquote>
+
+	<h3>Remote Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The remote page has the Airtable Service Dock element. Make sure to
+			update the <em>tablename</em> attribute to match your table name.</p>
+
+		<img class="documentation_image" src="./img/demo14_remote_servicedock.png">
+
+		<p><b>Remote Interface</b></p>
+
+		<p>The interface is two text boxes and a button.</p>
+
+		<img class="documentation_image" src="./img/demo14_remote_code.png">
+
+		<p>This is what the interface will look like on the Remote Page:</p>
+
+		<img class="documentation_image" src="./img/demo14_remote_interface.png">
+
+	</blockquote>
+
+	<h3>Local Page Setup</h3>
+
+	<blockquote>
+
+		<p><b>Service Dock</b></p>
+
+		<p>The local page has both the Airtable Service Dock element (make sure
+			to update the <em>tablename</em> attribute to match your table name).
+			There is also a single SPIKE Prime Service Dock element.</p>
+
+		<img class="documentation_image" src="./img/demo14_local_servicedock.png">
+
+		<p><b>Local Interface</b></p>
+
+		<p>The local page is only monitoring the command value. When activated (equals "ADD"),
+			it'll download and run the code (replacing "CLOUD[number1]" and
+			"CLOUD[number2]" with the respective values stored in Airtable.</p>
+
+		<p>The reset clears the command value in the cloud, so that the user can
+			activate it again from the remote interface.</p>
+
+		<img class="documentation_image" src="./img/demo14_local_code.png">
+
+		<p>This is how the interface will look on the Local Page:</p>
+
+		<img class="documentation_image" src="./img/demo14_local_interface.png">
+
+		<p>Note: to develop the code I used CodingRooms to write the code, using
+			test values for the numbers to add.  Then when I moved the code from
+			CodingRooms over to my webpage, I then replaced the test values with the
+			"CLOUD[number1]" and "CLOUD[number2]" values to
+			be replaced.</p>
+
+			<img class="documentation_image" src="./img/demo14_codingrooms.png">
+
+	</blockquote>
+
+	<h2>Demo 14 Quick Links:</h2>
+  <p>
+    <ul>
+      <li><a href="./demo14_remote.html" target=_blank>Remote Page</a></li>
+      <li><a href="./demo14_local.html" target=_blank>Local Page</a></li>
+      <li><a href="./demo14_documentation.html" target=_blank>Documentation Page</a></li>
+    </ul>
+  </p>
+	<p><a href="../index.html">Return back to the main homepage.</a></p>
+
+</body>
+</html>
